@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { cn } from '../lib/utils';
 import { motion } from 'motion/react';
-import { ArrowLeft, Search, SlidersHorizontal, Check, X, QrCode, CreditCard, ChevronRight, Home } from 'lucide-react';
+import { ArrowLeft, Search, SlidersHorizontal, Check, X, QrCode, CreditCard, ChevronRight, Home, ArrowRight } from 'lucide-react';
 
 // Mock Data Generator
 const generateTemplates = (category: string) => {
@@ -24,7 +24,7 @@ const generateTemplates = (category: string) => {
 
 export function CategoryTemplatesPage() {
   const { category } = useParams<{ category: string }>();
-  
+
   const [templates] = useState(generateTemplates(category || 'general'));
   const [filters, setFilters] = useState({
     orientation: 'all',
@@ -72,15 +72,15 @@ export function CategoryTemplatesPage() {
           </div>
 
           <div className="flex gap-3 w-full md:w-auto">
-             <div className="relative flex-1 md:w-64">
+            <div className="relative flex-1 md:w-64">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input 
-                type="text" 
-                placeholder="Search templates..." 
+              <input
+                type="text"
+                placeholder="Search templates..."
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 outline-none transition-all focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-white placeholder:text-slate-500"
               />
             </div>
-            <button 
+            <button
               onClick={() => setShowFilters(!showFilters)}
               className={cn(
                 "p-2.5 rounded-xl border border-white/10 transition-all hover:bg-white/10 flex items-center gap-2 px-4",
@@ -95,10 +95,10 @@ export function CategoryTemplatesPage() {
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Glassmorphism Sidebar Filters */}
-          <motion.aside 
+          <motion.aside
             initial={false}
-            animate={{ 
-              width: showFilters ? 'auto' : '0px', 
+            animate={{
+              width: showFilters ? 'auto' : '0px',
               opacity: showFilters ? 1 : 0,
               display: showFilters ? 'block' : 'none'
             }}
@@ -121,11 +121,11 @@ export function CategoryTemplatesPage() {
                   {['all', 'vertical', 'horizontal'].map(opt => (
                     <button
                       key={opt}
-                      onClick={() => setFilters({...filters, orientation: opt})}
+                      onClick={() => setFilters({ ...filters, orientation: opt })}
                       className={cn(
                         "flex-1 py-2 text-xs font-medium rounded-md capitalize transition-all",
-                        filters.orientation === opt 
-                          ? "bg-blue-600 text-white shadow-lg" 
+                        filters.orientation === opt
+                          ? "bg-blue-600 text-white shadow-lg"
                           : "text-slate-400 hover:text-white"
                       )}
                     >
@@ -142,14 +142,14 @@ export function CategoryTemplatesPage() {
                   {['all', 'blue', 'red', 'green', 'dark'].map(color => (
                     <button
                       key={color}
-                      onClick={() => setFilters({...filters, color})}
+                      onClick={() => setFilters({ ...filters, color })}
                       className={cn(
                         "w-10 h-10 rounded-xl border-2 transition-all hover:scale-110 flex items-center justify-center",
                         filters.color === color ? "border-white shadow-[0_0_10px_rgba(255,255,255,0.3)]" : "border-transparent opacity-70 hover:opacity-100",
-                        color === 'all' ? "bg-slate-700" : 
-                        color === 'blue' ? "bg-blue-500" :
-                        color === 'red' ? "bg-red-500" :
-                        color === 'green' ? "bg-emerald-500" : "bg-slate-900"
+                        color === 'all' ? "bg-slate-700" :
+                          color === 'blue' ? "bg-blue-500" :
+                            color === 'red' ? "bg-red-500" :
+                              color === 'green' ? "bg-emerald-500" : "bg-slate-900"
                       )}
                       title={color}
                     >
@@ -168,8 +168,8 @@ export function CategoryTemplatesPage() {
                       <div className="flex items-center gap-3">
                         <div className={cn(
                           "w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
-                          opt === 'qr' ? "bg-blue-500/20 text-blue-400" : 
-                          opt === 'barcode' ? "bg-purple-500/20 text-purple-400" : "bg-slate-500/20 text-slate-400"
+                          opt === 'qr' ? "bg-blue-500/20 text-blue-400" :
+                            opt === 'barcode' ? "bg-purple-500/20 text-purple-400" : "bg-slate-500/20 text-slate-400"
                         )}>
                           {opt === 'qr' ? <QrCode className="w-4 h-4" /> : opt === 'barcode' ? <CreditCard className="w-4 h-4" /> : <Check className="w-4 h-4" />}
                         </div>
@@ -179,18 +179,18 @@ export function CategoryTemplatesPage() {
                       </div>
                       <div className={cn(
                         "w-5 h-5 rounded-full border flex items-center justify-center transition-all",
-                        filters.feature === opt 
-                          ? "bg-blue-500 border-blue-500" 
+                        filters.feature === opt
+                          ? "bg-blue-500 border-blue-500"
                           : "border-slate-600 group-hover:border-slate-400"
                       )}>
                         {filters.feature === opt && <Check className="w-3 h-3 text-white" />}
                       </div>
-                      <input 
-                        type="radio" 
-                        name="feature" 
+                      <input
+                        type="radio"
+                        name="feature"
                         className="hidden"
                         checked={filters.feature === opt}
-                        onChange={() => setFilters({...filters, feature: opt})}
+                        onChange={() => setFilters({ ...filters, feature: opt })}
                       />
                     </label>
                   ))}
@@ -215,21 +215,21 @@ export function CategoryTemplatesPage() {
                     template.orientation === 'horizontal' ? "aspect-[1.586/1]" : "aspect-[1/1.586]"
                   )}>
                     {/* Image */}
-                    <img 
-                      src={template.image} 
+                    <img
+                      src={template.image}
                       alt={template.name}
                       className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    
+
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent opacity-90" />
 
                     {/* Floating Elements */}
                     <div className="absolute top-3 left-3 flex gap-2">
-                       <span className="px-2 py-1 bg-blue-500/20 border border-blue-500/30 backdrop-blur-md text-blue-300 text-[10px] uppercase font-bold rounded-md">
-                         {template.tags}
-                       </span>
+                      <span className="px-2 py-1 bg-blue-500/20 border border-blue-500/30 backdrop-blur-md text-blue-300 text-[10px] uppercase font-bold rounded-md">
+                        {template.tags}
+                      </span>
                     </div>
 
                     {/* Hover Actions */}
@@ -244,10 +244,10 @@ export function CategoryTemplatesPage() {
                       <h3 className="font-bold text-white text-lg mb-1 truncate">{template.name}</h3>
                       <div className="flex items-center gap-3 text-xs text-slate-400">
                         <div className="flex items-center gap-1">
-                          <div className={cn("w-2 h-2 rounded-full", 
-                            template.color === 'blue' ? 'bg-blue-500' : 
-                            template.color === 'red' ? 'bg-red-500' : 
-                            template.color === 'green' ? 'bg-emerald-500' : 'bg-slate-500'
+                          <div className={cn("w-2 h-2 rounded-full",
+                            template.color === 'blue' ? 'bg-blue-500' :
+                              template.color === 'red' ? 'bg-red-500' :
+                                template.color === 'green' ? 'bg-emerald-500' : 'bg-slate-500'
                           )} />
                           <span className="capitalize">{template.color}</span>
                         </div>
@@ -262,7 +262,7 @@ export function CategoryTemplatesPage() {
                 </motion.div>
               ))}
             </div>
-            
+
             {filteredTemplates.length === 0 && (
               <div className="text-center py-20 border border-dashed border-white/10 rounded-3xl bg-white/5">
                 <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-4">
@@ -270,7 +270,7 @@ export function CategoryTemplatesPage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">No templates found</h3>
                 <p className="text-slate-400 mb-6">Try adjusting your filters to see more results.</p>
-                <button 
+                <button
                   onClick={() => setFilters({ orientation: 'all', color: 'all', feature: 'all' })}
                   className="text-blue-400 hover:text-blue-300 font-medium hover:underline"
                 >
