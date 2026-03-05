@@ -10,6 +10,8 @@ import { CompanyAdminOverview } from './pages/dashboard/CompanyAdminOverview';
 import { CompanyUserOverview } from './pages/dashboard/CompanyUserOverview';
 import { CollegeAdminOverview } from './pages/dashboard/CollegeAdminOverview';
 import { CollegeUserOverview } from './pages/dashboard/CollegeUserOverview';
+import { AuthPage } from './pages/AuthPage';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 export default function App() {
@@ -23,30 +25,32 @@ export default function App() {
             <Route path="/templates/:category" element={<CategoryTemplatesPage />} />
             <Route path="/feature/:slug" element={<FeatureDetailsPage />} />
 
-            {/* Dashboard Routes */}
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<Navigate to="/dashboard/super/overview" replace />} />
+            {/* Auth Routes */}
+            <Route path="/login" element={<AuthPage />} />
+
+            {/* Dashboards Wrapper */}
+            <Route path="/" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
 
               {/* Super Admin */}
-              <Route path="super/overview" element={<SuperAdminOverview />} />
-              <Route path="super/*" element={<SuperAdminOverview />} />
+              <Route path="super-admin/dashboard" element={<ProtectedRoute allowedRoles={['super-admin']}><SuperAdminOverview /></ProtectedRoute>} />
 
               {/* Company Admin */}
-              <Route path="company-admin/overview" element={<CompanyAdminOverview />} />
-              <Route path="company-admin/*" element={<CompanyAdminOverview />} />
+              <Route path="company-admin/dashboard" element={<ProtectedRoute allowedRoles={['company-admin']}><CompanyAdminOverview /></ProtectedRoute>} />
 
               {/* Company User */}
-              <Route path="company-user/profile" element={<CompanyUserOverview />} />
-              <Route path="company-user/*" element={<CompanyUserOverview />} />
+              <Route path="company-user/dashboard" element={<ProtectedRoute allowedRoles={['company-user']}><CompanyUserOverview /></ProtectedRoute>} />
 
               {/* College Admin */}
-              <Route path="college-admin/overview" element={<CollegeAdminOverview />} />
-              <Route path="college-admin/*" element={<CollegeAdminOverview />} />
+              <Route path="college-admin/dashboard" element={<ProtectedRoute allowedRoles={['college-admin']}><CollegeAdminOverview /></ProtectedRoute>} />
 
               {/* College User */}
-              <Route path="college-user/profile" element={<CollegeUserOverview />} />
-              <Route path="college-user/*" element={<CollegeUserOverview />} />
+              <Route path="college-user/dashboard" element={<ProtectedRoute allowedRoles={['college-user']}><CollegeUserOverview /></ProtectedRoute>} />
+
             </Route>
+
+            {/* Fallback */}
+            <Route path="/dashboard" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

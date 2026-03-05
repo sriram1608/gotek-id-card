@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export type UserRole = 
+export type UserRole =
   | 'super-admin'
   | 'company-admin'
   | 'company-user'
@@ -12,6 +12,7 @@ interface User {
   name: string;
   email: string;
   role: UserRole;
+  password?: string;
   organization?: string;
   avatar?: string;
 }
@@ -19,26 +20,33 @@ interface User {
 interface AuthContextType {
   user: User | null;
   role: UserRole | null;
-  loginAs: (role: UserRole) => void;
+  login: (email: string, password: string) => Promise<User | null>;
   logout: () => void;
 }
 
-const mockUsers: Record<UserRole, User> = {
-  'super-admin': { id: '1', name: 'Alex Super', email: 'alex@gotek.com', role: 'super-admin' },
-  'company-admin': { id: '2', name: 'Sarah Tech', email: 'sarah@techcorp.com', role: 'company-admin', organization: 'TechCorp' },
-  'company-user': { id: '3', name: 'John Doe', email: 'john@techcorp.com', role: 'company-user', organization: 'TechCorp' },
-  'college-admin': { id: '4', name: 'Prof. Smith', email: 'smith@statecollege.edu', role: 'college-admin', organization: 'State College' },
-  'college-user': { id: '5', name: 'Jane Student', email: 'jane@statecollege.edu', role: 'college-user', organization: 'State College' },
+const mockUsers: Record<string, User> = {
+  'superadmin@gotek.com': { id: '1', name: 'Alex Super', email: 'superadmin@gotek.com', password: '123456', role: 'super-admin' },
+  'companyadmin@gotek.com': { id: '2', name: 'Sarah Tech', email: 'companyadmin@gotek.com', password: '123456', role: 'company-admin', organization: 'TechCorp' },
+  'companyuser@gotek.com': { id: '3', name: 'John Doe', email: 'companyuser@gotek.com', password: '123456', role: 'company-user', organization: 'TechCorp' },
+  'collegeadmin@gotek.com': { id: '4', name: 'Prof. Smith', email: 'collegeadmin@gotek.com', password: '123456', role: 'college-admin', organization: 'State College' },
+  'collegeuser@gotek.com': { id: '5', name: 'Jane Student', email: 'collegeuser@gotek.com', password: '123456', role: 'college-user', organization: 'State College' },
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  // Start with super-admin for demo purposes
-  const [user, setUser] = useState<User | null>(mockUsers['super-admin']);
+  const [user, setUser] = useState<User | null>(null);
 
-  const loginAs = (role: UserRole) => {
-    setUser(mockUsers[role]);
+  const login = async (email: string, password: string) => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const foundUser = mockUsers[email.toLowerCase()];
+    if (foundUser && foundUser.password === password) {
+      setUser(foundUser);
+      return foundUser;
+    }
+    return null;
   };
 
   const logout = () => {
@@ -46,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, role: user?.role || null, loginAs, logout }}>
+    <AuthContext.Provider value={{ user, role: user?.role || null, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

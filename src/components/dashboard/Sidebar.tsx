@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {
     Building2, Users, Settings, LayoutDashboard,
     CreditCard, Activity, FileStack, Shield,
-    GraduationCap, Briefcase
+    GraduationCap, Briefcase, FileText, UserCircle, X
 } from 'lucide-react';
 import { useAuth, UserRole } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -19,47 +19,53 @@ const getNavItems = (role: UserRole | null): NavItem[] => {
     switch (role) {
         case 'super-admin':
             return [
-                { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/super/overview' },
-                { icon: Building2, label: 'Organizations', path: '/dashboard/super/organizations' },
-                { icon: Briefcase, label: 'Company Admins', path: '/dashboard/super/company-admins' },
-                { icon: GraduationCap, label: 'College Admins', path: '/dashboard/super/college-admins' },
-                { icon: Activity, label: 'System Analytics', path: '/dashboard/super/analytics' },
-                { icon: Settings, label: 'Settings', path: '/dashboard/super/settings' },
+                { icon: LayoutDashboard, label: 'Dashboard', path: '/super-admin/dashboard' },
+                { icon: Building2, label: 'Organizations', path: '/super-admin/organizations' },
+                { icon: Briefcase, label: 'Company Admins', path: '/super-admin/company-admins' },
+                { icon: GraduationCap, label: 'College Admins', path: '/super-admin/college-admins' },
+                { icon: Activity, label: 'Analytics', path: '/super-admin/analytics' },
+                { icon: Settings, label: 'Settings', path: '/super-admin/settings' },
             ];
         case 'company-admin':
             return [
-                { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard/company-admin/overview' },
-                { icon: Users, label: 'Company Users', path: '/dashboard/company-admin/users' },
-                { icon: CreditCard, label: 'ID Generation', path: '/dashboard/company-admin/id-generation' },
-                { icon: Activity, label: 'Activity Logs', path: '/dashboard/company-admin/activity' },
-                { icon: Settings, label: 'Settings', path: '/dashboard/company-admin/settings' },
+                { icon: LayoutDashboard, label: 'Dashboard', path: '/company-admin/dashboard' },
+                { icon: Users, label: 'Company Users', path: '/company-admin/users' },
+                { icon: FileStack, label: 'Templates', path: '/templates' },
+                { icon: CreditCard, label: 'ID Cards', path: '/company-admin/id-cards' },
+                { icon: FileText, label: 'Reports', path: '/company-admin/reports' },
             ];
         case 'company-user':
             return [
-                { icon: LayoutDashboard, label: 'My Profile', path: '/dashboard/company-user/profile' },
-                { icon: CreditCard, label: 'My ID Card', path: '/dashboard/company-user/id-card' },
-                { icon: Settings, label: 'Settings', path: '/dashboard/company-user/settings' },
+                { icon: LayoutDashboard, label: 'Dashboard', path: '/company-user/dashboard' },
+                { icon: UserCircle, label: 'My Profile', path: '/company-user/profile' },
+                { icon: FileStack, label: 'Templates', path: '/templates' },
+                { icon: CreditCard, label: 'My ID Card', path: '/company-user/id-card' },
             ];
         case 'college-admin':
             return [
-                { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard/college-admin/overview' },
-                { icon: Users, label: 'Students & Staff', path: '/dashboard/college-admin/users' },
-                { icon: FileStack, label: 'ID Templates', path: '/dashboard/college-admin/templates' },
-                { icon: CreditCard, label: 'Batch Generation', path: '/dashboard/college-admin/batch-generation' },
-                { icon: Settings, label: 'Settings', path: '/dashboard/college-admin/settings' },
+                { icon: LayoutDashboard, label: 'Dashboard', path: '/college-admin/dashboard' },
+                { icon: Users, label: 'College Users', path: '/college-admin/users' },
+                { icon: FileStack, label: 'Templates (Preview Only)', path: '/templates' },
+                { icon: CreditCard, label: 'ID Generation', path: '/college-admin/id-generation' },
             ];
         case 'college-user':
             return [
-                { icon: LayoutDashboard, label: 'My Details', path: '/dashboard/college-user/profile' },
-                { icon: CreditCard, label: 'My ID', path: '/dashboard/college-user/id-card' },
-                { icon: Settings, label: 'Settings', path: '/dashboard/college-user/settings' },
+                { icon: LayoutDashboard, label: 'Dashboard', path: '/college-user/dashboard' },
+                { icon: UserCircle, label: 'My Profile', path: '/college-user/profile' },
+                { icon: FileStack, label: 'Templates (Preview Only)', path: '/templates' },
+                { icon: CreditCard, label: 'My ID Card', path: '/college-user/id-card' },
             ];
         default:
             return [];
     }
 };
 
-export function Sidebar() {
+interface SidebarProps {
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+}
+
+export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
     const { role, user } = useAuth();
     const { theme } = useTheme();
     const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
@@ -68,18 +74,31 @@ export function Sidebar() {
 
     return (
         <aside className={cn(
-            "w-64 border-r flex flex-col transition-colors duration-300",
-            isDark ? "bg-[#0b1120]/95 border-white/10" : "bg-white border-slate-200"
+            "fixed inset-y-0 left-0 z-50 w-72 lg:w-64 border-r flex flex-col transition-transform duration-300 lg:static lg:translate-x-0",
+            isDark ? "bg-[#0b1120] border-white/10 shadow-2xl shadow-black lg:shadow-none" : "bg-white border-slate-200 shadow-2xl lg:shadow-none",
+            isOpen ? "translate-x-0" : "-translate-x-full"
         )}>
-            <div className="h-16 flex items-center px-6 border-b border-inherit">
+            <div className={cn(
+                "h-16 flex items-center justify-between px-6 border-b border-inherit shrink-0"
+            )}>
                 <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold">
                         G
                     </div>
                     <span className={cn("text-xl font-bold", isDark ? "text-white" : "text-slate-900")}>
-                        Gotek SaaS
+                        Gotek
                     </span>
                 </div>
+                {/* Mobile Close Button */}
+                <button
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                        "p-2 -mr-2 rounded-lg lg:hidden",
+                        isDark ? "text-slate-400 hover:bg-white/10 hover:text-white" : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                    )}
+                >
+                    <X className="w-5 h-5" />
+                </button>
             </div>
 
             <div className="p-4 pt-6 flex-1 overflow-y-auto">
@@ -100,8 +119,15 @@ export function Sidebar() {
                                     ? (isDark ? "bg-blue-500/10 text-blue-400" : "bg-blue-50 text-blue-600")
                                     : (isDark
                                         ? "text-slate-400 hover:text-slate-200 hover:bg-white/5"
-                                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100")
+                                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"),
+                                "active:scale-95"
                             )}
+                            onClick={() => {
+                                // Close sidebar on mobile when navigating
+                                if (window.innerWidth < 1024) {
+                                    setIsOpen(false);
+                                }
+                            }}
                         >
                             <item.icon className={cn("w-5 h-5", "transition-colors")} />
                             {item.label}

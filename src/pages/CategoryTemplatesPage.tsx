@@ -3,7 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { cn } from '../lib/utils';
 import { motion } from 'motion/react';
-import { ArrowLeft, Search, SlidersHorizontal, Check, X, QrCode, CreditCard, ChevronRight, Home, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Search, SlidersHorizontal, Check, X, QrCode, CreditCard, ChevronRight, Home, ArrowRight, Download, Eye } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 // Mock Data Generator
 const generateTemplates = (category: string) => {
@@ -24,6 +25,7 @@ const generateTemplates = (category: string) => {
 
 export function CategoryTemplatesPage() {
   const { category } = useParams<{ category: string }>();
+  const { user } = useAuth();
 
   const [templates] = useState(generateTemplates(category || 'general'));
   const [filters, setFilters] = useState({
@@ -234,9 +236,15 @@ export function CategoryTemplatesPage() {
 
                     {/* Hover Actions */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/40 backdrop-blur-[2px]">
-                      <button className="px-6 py-3 bg-blue-600 text-white rounded-full font-bold text-sm shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:bg-blue-500 hover:scale-105 transition-all flex items-center gap-2">
-                        Customize <ArrowRight className="w-4 h-4" />
-                      </button>
+                      {(!user || user.role === 'company-admin' || user.role === 'company-user' || user.role === 'super-admin') ? (
+                        <button className="px-6 py-3 bg-blue-600 text-white rounded-full font-bold text-sm shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:bg-blue-500 hover:scale-105 transition-all flex items-center gap-2">
+                          <Download className="w-4 h-4" /> Download Template
+                        </button>
+                      ) : (
+                        <button disabled className="px-6 py-3 bg-slate-700/80 text-white/50 rounded-full font-bold text-sm shadow-[0_0_20px_rgba(0,0,0,0.5)] cursor-not-allowed flex items-center gap-2">
+                          <Eye className="w-4 h-4" /> Preview Only
+                        </button>
+                      )}
                     </div>
 
                     {/* Bottom Info */}

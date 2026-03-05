@@ -9,6 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: ReactNode;
     className?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement> | (() => void) | any;
+    type?: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
 }
 
 export function Button({

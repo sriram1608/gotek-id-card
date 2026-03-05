@@ -20,8 +20,8 @@ export function Hero() {
           >
             <span className={cn(
               "inline-block py-1 px-3 rounded-full text-sm font-medium mb-6 border",
-              isDark 
-                ? "bg-blue-500/10 border-blue-500/20 text-blue-300" 
+              isDark
+                ? "bg-blue-500/10 border-blue-500/20 text-blue-300"
                 : "bg-blue-100 border-blue-200 text-blue-700"
             )}>
               Next-Gen ID Card Management
@@ -55,7 +55,7 @@ export function Hero() {
               isDark ? "text-slate-300" : "text-slate-600"
             )}
           >
-            The complete platform for schools, corporations, and events. 
+            The complete platform for schools, corporations, and events.
             Streamline your identity management with our automated workflow from design to dispatch.
           </motion.p>
 
@@ -65,18 +65,18 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <button className={cn(
+            <Link to="/login" className={cn(
               "px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-2 transition-all hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)]",
-              isDark 
-                ? "bg-blue-600 hover:bg-blue-500 text-white" 
+              isDark
+                ? "bg-blue-600 hover:bg-blue-500 text-white"
                 : "bg-blue-600 hover:bg-blue-700 text-white"
             )}>
-              Get Started Now <ArrowRight className="w-5 h-5" />
-            </button>
+              Login Now <ArrowRight className="w-5 h-5" />
+            </Link>
             <Link to="/templates" className={cn(
               "px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 border backdrop-blur-sm",
-              isDark 
-                ? "border-white/20 hover:bg-white/10 text-white" 
+              isDark
+                ? "border-white/20 hover:bg-white/10 text-white"
                 : "border-slate-300 hover:bg-slate-50 text-slate-700"
             )}>
               View Templates
