@@ -2,23 +2,21 @@ import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 import { Edit3, Mail, BookOpen, Clock, Calendar } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function CollegeUserOverview() {
     const { user } = useAuth();
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     return (
         <div className="space-y-6 max-w-5xl mx-auto">
             <div>
-                <h1 className={cn("text-2xl font-bold tracking-tight", isDark ? "text-white" : "text-slate-900")}>
+                <h1 className={cn("text-2xl font-bold tracking-tight", "text-slate-900")}>
                     Student Portal
                 </h1>
-                <p className={cn("text-sm mt-1", isDark ? "text-slate-400" : "text-slate-500")}>
+                <p className={cn("text-sm mt-1", "text-slate-500")}>
                     View your student profile and access your digital ID card.
                 </p>
             </div>
@@ -34,7 +32,7 @@ export function CollegeUserOverview() {
                             <div className="flex-1 w-full">
                                 <div className="flex justify-between items-start">
                                     <div>
-                                        <h2 className={cn("text-2xl font-bold", isDark ? "text-white" : "text-slate-900")}>{user?.name}</h2>
+                                        <h2 className={cn("text-2xl font-bold", "text-slate-900")}>{user?.name}</h2>
                                         <div className="flex items-center gap-3 mt-1.5">
                                             <Badge variant="warning">Undergraduate Student</Badge>
                                         </div>
@@ -48,24 +46,24 @@ export function CollegeUserOverview() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                             <div className="space-y-4">
-                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", isDark ? "text-slate-500" : "text-slate-400")}>Academic Details</h3>
+                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", "text-slate-400")}>Academic Details</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-3 text-sm">
-                                        <BookOpen className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
+                                        <BookOpen className={cn("w-4 h-4", "text-slate-500")} />
                                         <div>
                                             <p className={cn("text-xs text-slate-500")}>Course / Major</p>
-                                            <span className={cn("font-medium", isDark ? "text-slate-300" : "text-slate-700")}>B.S. Computer Science</span>
+                                            <span className={cn("font-medium", "text-slate-700")}>B.S. Computer Science</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <Clock className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
+                                        <Clock className={cn("w-4 h-4", "text-slate-500")} />
                                         <div>
                                             <p className={cn("text-xs text-slate-500")}>Enrollment Year</p>
-                                            <span className={cn("font-medium", isDark ? "text-slate-300" : "text-slate-700")}>Freshman - Class of 2028</span>
+                                            <span className={cn("font-medium", "text-slate-700")}>Freshman - Class of 2028</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <Calendar className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
+                                        <Calendar className={cn("w-4 h-4", "text-slate-500")} />
                                         <div>
                                             <p className={cn("text-xs text-slate-500")}>ID Valid Until</p>
                                             <span className={cn("font-medium text-emerald-500")}>May 2025 (Renewable)</span>
@@ -75,29 +73,29 @@ export function CollegeUserOverview() {
                             </div>
 
                             <div className="space-y-4">
-                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", isDark ? "text-slate-500" : "text-slate-400")}>Contact Details</h3>
+                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", "text-slate-400")}>Contact Details</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-3 text-sm">
-                                        <Mail className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
+                                        <Mail className={cn("w-4 h-4", "text-slate-500")} />
                                         <div>
                                             <p className={cn("text-xs text-slate-500")}>University Email</p>
-                                            <span className={cn("font-medium", isDark ? "text-slate-300" : "text-slate-700")}>{user?.email}</span>
+                                            <span className={cn("font-medium", "text-slate-700")}>{user?.email}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <div className={cn("w-4 h-4 border-2 rounded-full", isDark ? "border-slate-400" : "border-slate-500")} />
+                                        <div className={cn("w-4 h-4 border-2 rounded-full", "border-slate-500")} />
                                         <div>
                                             <p className={cn("text-xs text-slate-500")}>Student ID Number</p>
-                                            <span className={cn("font-mono font-medium", isDark ? "text-slate-300" : "text-slate-700")}>STU-24-9182</span>
+                                            <span className={cn("font-mono font-medium", "text-slate-700")}>STU-24-9182</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className={cn("mt-8 p-4 rounded-xl border", isDark ? "bg-amber-500/5 border-amber-500/10" : "bg-amber-50 border-amber-200")}>
+                        <div className={cn("mt-8 p-4 rounded-xl border", "bg-amber-50 border-amber-200")}>
                             <h3 className={cn("text-sm font-semibold text-amber-600 dark:text-amber-500 mb-2")}>Campus Access Status</h3>
-                            <p className={cn("text-sm", isDark ? "text-amber-200/70" : "text-amber-700/80")}>
+                            <p className={cn("text-sm", "text-amber-700/80")}>
                                 Your digital student ID grants you access to the Main Library, Science Building Labs, and South Campus Dormitories. Ensure your app is updated to use NFC scanning.
                             </p>
                         </div>
@@ -107,7 +105,7 @@ export function CollegeUserOverview() {
                 {/* Right Col - ID Card Preview */}
                 <div className="lg:col-span-1 space-y-6">
                     <Card className="flex flex-col items-center">
-                        <h2 className={cn("text-sm justify-self-start self-start font-semibold mb-6", isDark ? "text-white" : "text-slate-900")}>Digital Student Card</h2>
+                        <h2 className={cn("text-sm justify-self-start self-start font-semibold mb-6", "text-slate-900")}>Digital Student Card</h2>
 
                         {/* The ID Card */}
                         <motion.div

@@ -1,8 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
 import { Navbar } from '../components/Navbar';
 import { Background } from '../components/Background';
-import { ThemeSwitcher } from '../components/ThemeSwitcher';
+
 import { cn } from '../lib/utils';
 import { motion } from 'motion/react';
 import { ArrowLeft, LayoutTemplate, Palette, Shield, Download, Users, BarChart3, CheckCircle2 } from 'lucide-react';
@@ -84,14 +83,11 @@ const featuresData = {
 
 export function FeatureDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { theme } = useTheme();
-  const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
-
   const feature = featuresData[slug as keyof typeof featuresData];
 
   if (!feature) {
     return (
-      <div className={cn("min-h-screen flex items-center justify-center", isDark ? "text-white" : "text-slate-900")}>
+      <div className={cn("min-h-screen flex items-center justify-center", "text-slate-900")}>
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Feature Not Found</h1>
           <Link to="/" className="text-blue-500 hover:underline">Return Home</Link>
@@ -105,16 +101,16 @@ export function FeatureDetailsPage() {
   return (
     <div className={cn(
       "min-h-screen transition-colors duration-500 font-sans selection:bg-blue-500/30",
-      isDark ? "text-slate-100" : "text-slate-900"
+      "text-slate-900"
     )}>
       <Background />
       <Navbar />
-      <ThemeSwitcher />
+
 
       <main className="pt-32 pb-20 container mx-auto px-6">
         <Link to="/#features" className={cn(
           "inline-flex items-center gap-2 text-sm font-medium mb-8 transition-colors",
-          isDark ? "text-slate-400 hover:text-white" : "text-slate-500 hover:text-slate-900"
+          "text-slate-500 hover:text-slate-900"
         )}>
           <ArrowLeft className="w-4 h-4" /> Back to Features
         </Link>
@@ -127,28 +123,28 @@ export function FeatureDetailsPage() {
           >
             <div className={cn(
               "w-16 h-16 rounded-2xl flex items-center justify-center mb-8",
-              isDark ? "bg-blue-500/20 text-blue-400" : "bg-blue-100 text-blue-600"
+              "bg-blue-100 text-blue-600"
             )}>
               <Icon className="w-8 h-8" />
             </div>
-            
+
             <h1 className={cn(
               "text-4xl md:text-5xl font-bold mb-6",
-              isDark ? "text-white" : "text-slate-900"
+              "text-slate-900"
             )}>
               {feature.title}
             </h1>
-            
+
             <p className={cn(
               "text-xl mb-8 leading-relaxed",
-              isDark ? "text-slate-300" : "text-slate-600"
+              "text-slate-600"
             )}>
               {feature.description}
             </p>
 
             <div className="space-y-4 mb-10">
               {feature.details.map((detail, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -156,7 +152,7 @@ export function FeatureDetailsPage() {
                   className="flex items-start gap-3"
                 >
                   <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className={cn("text-lg", isDark ? "text-slate-400" : "text-slate-600")}>
+                  <span className={cn("text-lg", "text-slate-600")}>
                     {detail}
                   </span>
                 </motion.div>
@@ -165,9 +161,7 @@ export function FeatureDetailsPage() {
 
             <button className={cn(
               "px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-lg",
-              isDark 
-                ? "bg-blue-600 hover:bg-blue-500 text-white" 
-                : "bg-blue-600 hover:bg-blue-700 text-white"
+              "bg-blue-600 hover:bg-blue-700 text-white"
             )}>
               Try {feature.title} Now
             </button>
@@ -181,22 +175,22 @@ export function FeatureDetailsPage() {
           >
             <div className={cn(
               "aspect-video rounded-3xl overflow-hidden shadow-2xl border",
-              isDark ? "border-white/10" : "border-slate-200"
+              "border-slate-200"
             )}>
-              <img 
-                src={feature.image} 
-                alt={feature.title} 
+              <img
+                src={feature.image}
+                alt={feature.title}
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              
+
               {/* Overlay Gradient */}
               <div className={cn(
                 "absolute inset-0 bg-gradient-to-t",
-                isDark ? "from-[#0a192f]/80 to-transparent" : "from-white/50 to-transparent"
+                "from-white/50 to-transparent"
               )} />
             </div>
-            
+
             {/* Decorative Elements */}
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl -z-10" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl -z-10" />

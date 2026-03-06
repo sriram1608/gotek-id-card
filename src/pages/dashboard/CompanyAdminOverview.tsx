@@ -4,7 +4,7 @@ import { Table, TableColumn } from '../../components/ui/Table';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 import { Users, CreditCard, Activity, Plus, Search, FileDown } from 'lucide-react';
 
@@ -26,8 +26,6 @@ const mockCompanyUsers: CompanyUser[] = [
 ];
 
 export function CompanyAdminOverview() {
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     const [isNewUserModalOpen, setIsNewUserModalOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -86,10 +84,10 @@ export function CompanyAdminOverview() {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className={cn("text-2xl font-bold tracking-tight", isDark ? "text-white" : "text-slate-900")}>
+                    <h1 className={cn("text-2xl font-bold tracking-tight", "text-slate-900")}>
                         Company Dashboard
                     </h1>
-                    <p className={cn("text-sm mt-1", isDark ? "text-slate-400" : "text-slate-500")}>
+                    <p className={cn("text-sm mt-1", "text-slate-500")}>
                         Manage your employees and ID cards for TechCorp Solutions.
                     </p>
                 </div>
@@ -114,18 +112,18 @@ export function CompanyAdminOverview() {
                             <stat.icon className={cn("w-6 h-6", stat.color)} />
                         </div>
                         <div>
-                            <p className={cn("text-sm font-medium", isDark ? "text-slate-400" : "text-slate-500")}>{stat.label}</p>
-                            <p className={cn("text-2xl font-bold mt-0.5", isDark ? "text-white" : "text-slate-900")}>{stat.value}</p>
+                            <p className={cn("text-sm font-medium", "text-slate-500")}>{stat.label}</p>
+                            <p className={cn("text-2xl font-bold mt-0.5", "text-slate-900")}>{stat.value}</p>
                         </div>
                     </Card>
                 ))}
             </div>
 
             <Card className="p-0 overflow-hidden">
-                <div className={cn("p-6 border-b flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", isDark ? "border-white/10" : "border-slate-200")}>
-                    <h2 className={cn("text-lg font-semibold", isDark ? "text-white" : "text-slate-900")}>Employee Directory</h2>
+                <div className={cn("p-6 border-b flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", "border-slate-200")}>
+                    <h2 className={cn("text-lg font-semibold", "text-slate-900")}>Employee Directory</h2>
                     <div className="relative w-full sm:w-64">
-                        <Search className={cn("absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4", isDark ? "text-slate-500" : "text-slate-400")} />
+                        <Search className={cn("absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4", "text-slate-400")} />
                         <input
                             type="text"
                             placeholder="Search employees..."
@@ -133,9 +131,7 @@ export function CompanyAdminOverview() {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className={cn(
                                 "w-full pl-9 pr-4 py-2 rounded-lg text-sm outline-none transition-all",
-                                isDark
-                                    ? "bg-[#0b1120] border border-white/10 focus:border-blue-500/50 text-white"
-                                    : "bg-slate-50 border border-slate-200 focus:border-blue-500 text-slate-900"
+                                "bg-slate-50 border border-slate-200 focus:border-blue-500 text-slate-900"
                             )}
                         />
                     </div>
@@ -158,31 +154,31 @@ export function CompanyAdminOverview() {
                 <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                            <label className={cn("text-sm font-medium", isDark ? "text-slate-300" : "text-slate-700")}>First Name</label>
-                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", isDark ? "bg-[#0b1120] border-white/10 text-white focus:border-blue-500" : "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
+                            <label className={cn("text-sm font-medium", "text-slate-700")}>First Name</label>
+                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
                         </div>
                         <div className="space-y-1.5">
-                            <label className={cn("text-sm font-medium", isDark ? "text-slate-300" : "text-slate-700")}>Last Name</label>
-                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", isDark ? "bg-[#0b1120] border-white/10 text-white focus:border-blue-500" : "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
+                            <label className={cn("text-sm font-medium", "text-slate-700")}>Last Name</label>
+                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
                         </div>
                     </div>
                     <div className="space-y-1.5">
-                        <label className={cn("text-sm font-medium", isDark ? "text-slate-300" : "text-slate-700")}>Email Address</label>
-                        <input type="email" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", isDark ? "bg-[#0b1120] border-white/10 text-white focus:border-blue-500" : "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
+                        <label className={cn("text-sm font-medium", "text-slate-700")}>Email Address</label>
+                        <input type="email" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                            <label className={cn("text-sm font-medium", isDark ? "text-slate-300" : "text-slate-700")}>Department</label>
-                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", isDark ? "bg-[#0b1120] border-white/10 text-white focus:border-blue-500" : "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
+                            <label className={cn("text-sm font-medium", "text-slate-700")}>Department</label>
+                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
                         </div>
                         <div className="space-y-1.5">
-                            <label className={cn("text-sm font-medium", isDark ? "text-slate-300" : "text-slate-700")}>Job Role</label>
-                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", isDark ? "bg-[#0b1120] border-white/10 text-white focus:border-blue-500" : "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
+                            <label className={cn("text-sm font-medium", "text-slate-700")}>Job Role</label>
+                            <input type="text" className={cn("w-full px-3 py-2 rounded-lg text-sm border outline-none", "bg-white border-slate-200 text-slate-900 focus:border-blue-500")} />
                         </div>
                     </div>
                     <div className="flex items-center gap-2 mt-2">
                         <input type="checkbox" id="auto-generate" className="rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
-                        <label htmlFor="auto-generate" className={cn("text-sm", isDark ? "text-slate-300" : "text-slate-700")}>Auto-generate ID card request upon creation</label>
+                        <label htmlFor="auto-generate" className={cn("text-sm", "text-slate-700")}>Auto-generate ID card request upon creation</label>
                     </div>
                 </div>
             </Modal>

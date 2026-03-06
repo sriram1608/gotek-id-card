@@ -4,7 +4,7 @@ import { Table, TableColumn } from '../../components/ui/Table';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 import { Users, FileStack, Zap, Plus, Search, CheckSquare, Image as ImageIcon } from 'lucide-react';
 
@@ -26,8 +26,6 @@ const mockCollegeUsers: CollegeUser[] = [
 ];
 
 export function CollegeAdminOverview() {
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     const [isTemplateModalOpen, setIsTemplateModalOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -93,10 +91,10 @@ export function CollegeAdminOverview() {
         <div className="space-y-6 max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className={cn("text-2xl font-bold tracking-tight", isDark ? "text-white" : "text-slate-900")}>
+                    <h1 className={cn("text-2xl font-bold tracking-tight", "text-slate-900")}>
                         College Dashboard
                     </h1>
-                    <p className={cn("text-sm mt-1", isDark ? "text-slate-400" : "text-slate-500")}>
+                    <p className={cn("text-sm mt-1", "text-slate-500")}>
                         Manage students, staff, and bulk ID card generation for State University.
                     </p>
                 </div>
@@ -125,22 +123,22 @@ export function CollegeAdminOverview() {
                             <stat.icon className={cn("w-6 h-6", stat.color)} />
                         </div>
                         <div>
-                            <p className={cn("text-sm font-medium", isDark ? "text-slate-400" : "text-slate-500")}>{stat.label}</p>
-                            <p className={cn("text-2xl font-bold mt-0.5", isDark ? "text-white" : "text-slate-900")}>{stat.value}</p>
+                            <p className={cn("text-sm font-medium", "text-slate-500")}>{stat.label}</p>
+                            <p className={cn("text-2xl font-bold mt-0.5", "text-slate-900")}>{stat.value}</p>
                         </div>
                     </Card>
                 ))}
             </div>
 
             <Card className="p-0 overflow-hidden">
-                <div className={cn("p-6 border-b flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", isDark ? "border-white/10" : "border-slate-200")}>
+                <div className={cn("p-6 border-b flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", "border-slate-200")}>
                     <div className="flex items-center gap-4">
-                        <h2 className={cn("text-lg font-semibold", isDark ? "text-white" : "text-slate-900")}>Student & Staff Directory</h2>
+                        <h2 className={cn("text-lg font-semibold", "text-slate-900")}>Student & Staff Directory</h2>
                         <Badge variant="info">Batch Selected: 0</Badge>
                     </div>
                     <div className="relative w-full sm:w-64 flex gap-2">
                         <div className="relative flex-1">
-                            <Search className={cn("absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4", isDark ? "text-slate-500" : "text-slate-400")} />
+                            <Search className={cn("absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4", "text-slate-400")} />
                             <input
                                 type="text"
                                 placeholder="Search by name or ID..."
@@ -148,9 +146,7 @@ export function CollegeAdminOverview() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className={cn(
                                     "w-full pl-9 pr-4 py-2 rounded-lg text-sm outline-none transition-all",
-                                    isDark
-                                        ? "bg-[#0b1120] border border-white/10 focus:border-amber-500/50 text-white"
-                                        : "bg-slate-50 border border-slate-200 focus:border-amber-500 text-slate-900"
+                                    "bg-slate-50 border border-slate-200 focus:border-amber-500 text-slate-900"
                                 )}
                             />
                         </div>
@@ -174,24 +170,24 @@ export function CollegeAdminOverview() {
                 }
             >
                 <div className="space-y-6">
-                    <p className={cn("text-sm", isDark ? "text-slate-400" : "text-slate-600")}>
+                    <p className={cn("text-sm", "text-slate-600")}>
                         Assign different ID card design templates to your user groups for automatic batch generation.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         {/* Admin Template Selection */}
-                        <div className={cn("p-4 rounded-xl border", isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200")}>
-                            <h4 className={cn("font-medium mb-3", isDark ? "text-white" : "text-slate-900")}>Student ID Template</h4>
-                            <div className={cn("aspect-video rounded-lg border-2 border-dashed flex flex-col items-center justify-center mb-3 cursor-pointer hover:border-amber-500 transition-colors", isDark ? "border-slate-700 bg-[#0b1120]" : "border-slate-300 bg-white")}>
+                        <div className={cn("p-4 rounded-xl border", "bg-slate-50 border-slate-200")}>
+                            <h4 className={cn("font-medium mb-3", "text-slate-900")}>Student ID Template</h4>
+                            <div className={cn("aspect-video rounded-lg border-2 border-dashed flex flex-col items-center justify-center mb-3 cursor-pointer hover:border-amber-500 transition-colors", "border-slate-300 bg-white")}>
                                 <ImageIcon className="w-8 h-8 text-slate-400 mb-2" />
                                 <span className="text-xs text-amber-500 font-medium font-medium">Select Template</span>
                             </div>
                             <p className="text-xs text-slate-500 text-center">Standard Blue - Vertical</p>
                         </div>
 
-                        <div className={cn("p-4 rounded-xl border", isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200")}>
-                            <h4 className={cn("font-medium mb-3", isDark ? "text-white" : "text-slate-900")}>Staff ID Template</h4>
-                            <div className={cn("aspect-video rounded-lg border-2 border-dashed flex flex-col items-center justify-center mb-3 cursor-pointer hover:border-amber-500 transition-colors", isDark ? "border-slate-700 bg-[#0b1120]" : "border-slate-300 bg-white")}>
+                        <div className={cn("p-4 rounded-xl border", "bg-slate-50 border-slate-200")}>
+                            <h4 className={cn("font-medium mb-3", "text-slate-900")}>Staff ID Template</h4>
+                            <div className={cn("aspect-video rounded-lg border-2 border-dashed flex flex-col items-center justify-center mb-3 cursor-pointer hover:border-amber-500 transition-colors", "border-slate-300 bg-white")}>
                                 <ImageIcon className="w-8 h-8 text-slate-400 mb-2" />
                                 <span className="text-xs text-amber-500 font-medium font-medium">Select Template</span>
                             </div>

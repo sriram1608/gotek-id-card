@@ -1,9 +1,8 @@
-import { useTheme } from '../context/ThemeContext';
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 import { Navbar } from '../components/Navbar';
 import { Background } from '../components/Background';
-import { ThemeSwitcher } from '../components/ThemeSwitcher';
+
 import { Search, Filter, ArrowLeft, QrCode, User, Phone, Mail, Calendar, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -90,19 +89,16 @@ const templates = [
   }
 ];
 
-export function TemplatesPage() {
-  const { theme } = useTheme();
-  const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+export function TemplatesPage() {  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
     <div className={cn(
       "min-h-screen transition-colors duration-500 font-sans selection:bg-blue-500/30",
-      isDark ? "text-slate-100" : "text-slate-900"
+      "text-slate-900"
     )}>
       <Background />
       <Navbar />
-      <ThemeSwitcher />
+
 
       <main className="pt-24 pb-20 container mx-auto px-6">
         {/* Header */}
@@ -110,7 +106,7 @@ export function TemplatesPage() {
           <div>
             <Link to="/" className={cn(
               "inline-flex items-center gap-2 text-sm font-medium mb-4 transition-colors",
-              isDark ? "text-slate-400 hover:text-white" : "text-slate-500 hover:text-slate-900"
+              "text-slate-500 hover:text-slate-900"
             )}>
               <ArrowLeft className="w-4 h-4" /> Back to Home
             </Link>
@@ -119,14 +115,14 @@ export function TemplatesPage() {
               animate={{ opacity: 1, y: 0 }}
               className={cn(
                 "text-4xl md:text-5xl font-bold mb-4",
-                isDark ? "text-white" : "text-slate-900"
+                "text-slate-900"
               )}
             >
               Template Gallery
             </motion.h1>
             <p className={cn(
               "text-lg max-w-2xl",
-              isDark ? "text-slate-400" : "text-slate-600"
+              "text-slate-600"
             )}>
               Explore our collection of premium, print-ready ID card templates designed for modern organizations.
             </p>
@@ -141,17 +137,13 @@ export function TemplatesPage() {
                 placeholder="Search templates..." 
                 className={cn(
                   "w-full pl-10 pr-4 py-2.5 rounded-xl border outline-none transition-all focus:ring-2",
-                  isDark 
-                    ? "bg-white/5 border-white/10 focus:ring-blue-500/50" 
-                    : "bg-white border-slate-200 focus:ring-blue-500/20"
+                  "bg-white border-slate-200 focus:ring-blue-500/20"
                 )}
               />
             </div>
             <button className={cn(
               "p-2.5 rounded-xl border transition-all hover:scale-105",
-              isDark 
-                ? "bg-white/5 border-white/10 hover:bg-white/10" 
-                : "bg-white border-slate-200 hover:bg-slate-50"
+              "bg-white border-slate-200 hover:bg-slate-50"
             )}>
               <Filter className="w-5 h-5 opacity-70" />
             </button>
@@ -286,7 +278,7 @@ export function TemplatesPage() {
 
               {/* Template Info Below Card */}
               <div className="mt-6 text-center">
-                <h3 className={cn("text-lg font-bold mb-1", isDark ? "text-white" : "text-slate-900")}>
+                <h3 className={cn("text-lg font-bold mb-1", "text-slate-900")}>
                   {template.name}
                 </h3>
                 <div className="flex justify-center gap-2 text-sm opacity-60">
@@ -296,9 +288,7 @@ export function TemplatesPage() {
                 </div>
                 <button className={cn(
                   "mt-4 px-6 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0",
-                  isDark 
-                    ? "bg-white text-slate-900 hover:bg-blue-50" 
-                    : "bg-slate-900 text-white hover:bg-slate-800"
+                  "bg-slate-900 text-white hover:bg-slate-800"
                 )}>
                   Customize Template
                 </button>

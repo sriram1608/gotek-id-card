@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -21,8 +21,6 @@ export function Modal({
     footer,
     maxWidth = 'md'
 }: ModalProps) {
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     const maxWidthClasses = {
         sm: 'max-w-md',
@@ -70,7 +68,7 @@ export function Modal({
                         className={cn(
                             "relative w-full rounded-2xl shadow-2xl flex flex-col my-auto z-10 overflow-hidden outline-none",
                             maxWidthClasses[maxWidth],
-                            isDark ? "bg-[#131b2f] border border-white/10" : "bg-white border border-slate-200"
+                            "bg-white border border-slate-200"
                         )}
                         role="dialog"
                         aria-modal="true"
@@ -78,16 +76,16 @@ export function Modal({
                         {/* Header */}
                         <div className={cn(
                             "flex items-center justify-between px-6 py-4 border-b",
-                            isDark ? "border-white/10" : "border-slate-200"
+                            "border-slate-200"
                         )}>
-                            <h3 className={cn("text-lg font-semibold", isDark ? "text-white" : "text-slate-900")}>
+                            <h3 className={cn("text-lg font-semibold", "text-slate-900")}>
                                 {title}
                             </h3>
                             <button
                                 onClick={onClose}
                                 className={cn(
                                     "p-1.5 rounded-lg transition-colors",
-                                    isDark ? "hover:bg-white/10 text-slate-400" : "hover:bg-slate-100 text-slate-500"
+                                    "hover:bg-slate-100 text-slate-500"
                                 )}
                             >
                                 <X className="w-5 h-5" />
@@ -103,7 +101,7 @@ export function Modal({
                         {footer && (
                             <div className={cn(
                                 "px-6 py-4 border-t flex justify-end gap-3",
-                                isDark ? "border-white/10 bg-white/5" : "border-slate-200 bg-slate-50"
+                                "border-slate-200 bg-slate-50"
                             )}>
                                 {footer}
                             </div>

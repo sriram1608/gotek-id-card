@@ -3,7 +3,7 @@ import { Badge } from '../../components/ui/Badge';
 import { Table, TableColumn } from '../../components/ui/Table';
 import { HierarchyTree } from '../../components/dashboard/HierarchyTree';
 import { Building2, Users, Activity, GraduationCap } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 
 interface OrgData {
@@ -23,8 +23,6 @@ const mockOrganizations: OrgData[] = [
 ];
 
 export function SuperAdminOverview() {
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     const columns: TableColumn<OrgData>[] = [
         { key: 'name', header: 'Organization' },
@@ -54,10 +52,10 @@ export function SuperAdminOverview() {
     return (
         <div className="space-y-6">
             <div>
-                <h1 className={cn("text-2xl font-bold tracking-tight", isDark ? "text-white" : "text-slate-900")}>
+                <h1 className={cn("text-2xl font-bold tracking-tight", "text-slate-900")}>
                     Super Admin Dashboard
                 </h1>
-                <p className={cn("text-sm mt-1", isDark ? "text-slate-400" : "text-slate-500")}>
+                <p className={cn("text-sm mt-1", "text-slate-500")}>
                     System overview and hierarchy management.
                 </p>
             </div>
@@ -74,8 +72,8 @@ export function SuperAdminOverview() {
                             <stat.icon className={cn("w-6 h-6", stat.color)} />
                         </div>
                         <div>
-                            <p className={cn("text-sm font-medium", isDark ? "text-slate-400" : "text-slate-500")}>{stat.label}</p>
-                            <p className={cn("text-2xl font-bold mt-0.5", isDark ? "text-white" : "text-slate-900")}>{stat.value}</p>
+                            <p className={cn("text-sm font-medium", "text-slate-500")}>{stat.label}</p>
+                            <p className={cn("text-2xl font-bold mt-0.5", "text-slate-900")}>{stat.value}</p>
                             <p className="text-xs text-emerald-500 mt-1">{stat.trend}</p>
                         </div>
                     </Card>
@@ -85,15 +83,15 @@ export function SuperAdminOverview() {
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div className="xl:col-span-3">
                     <Card className="p-6">
-                        <h2 className={cn("text-lg font-semibold mb-6", isDark ? "text-white" : "text-slate-900")}>System Hierarchy</h2>
+                        <h2 className={cn("text-lg font-semibold mb-6", "text-slate-900")}>System Hierarchy</h2>
                         <HierarchyTree />
                     </Card>
                 </div>
 
                 <div className="xl:col-span-3">
                     <Card className="p-0 overflow-hidden">
-                        <div className={cn("p-6 border-b", isDark ? "border-white/10" : "border-slate-200")}>
-                            <h2 className={cn("text-lg font-semibold", isDark ? "text-white" : "text-slate-900")}>Recent Organizations</h2>
+                        <div className={cn("p-6 border-b", "border-slate-200")}>
+                            <h2 className={cn("text-lg font-semibold", "text-slate-900")}>Recent Organizations</h2>
                         </div>
                         <Table data={mockOrganizations} columns={columns} className="border-0 rounded-none" />
                     </Card>

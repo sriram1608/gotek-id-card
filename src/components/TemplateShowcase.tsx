@@ -1,4 +1,3 @@
-import { useTheme } from '../context/ThemeContext';
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 import { User, QrCode, Fingerprint } from 'lucide-react';
@@ -39,9 +38,6 @@ const templates = [
 ];
 
 export function TemplateShowcase() {
-  const { theme } = useTheme();
-  const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
-
   return (
     <section id="templates" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
@@ -52,14 +48,14 @@ export function TemplateShowcase() {
             viewport={{ once: true }}
             className={cn(
               "text-3xl md:text-5xl font-bold mb-6",
-              isDark ? "text-white" : "text-slate-900"
+              "text-slate-900"
             )}
           >
             Premium Templates
           </motion.h2>
           <p className={cn(
             "text-lg max-w-2xl mx-auto",
-            isDark ? "text-slate-400" : "text-slate-600"
+            "text-slate-600"
           )}>
             Choose from our library of professionally designed templates or create your own from scratch.
           </p>
@@ -113,8 +109,8 @@ export function TemplateShowcase() {
               </div>
 
               <div className="mt-4 text-center">
-                <h3 className={cn("font-semibold", isDark ? "text-white" : "text-slate-900")}>{template.name}</h3>
-                <p className={cn("text-sm", isDark ? "text-slate-400" : "text-slate-500")}>{template.category}</p>
+                <h3 className={cn("font-semibold", "text-slate-900")}>{template.name}</h3>
+                <p className={cn("text-sm", "text-slate-500")}>{template.category}</p>
               </div>
             </motion.div>
           ))}

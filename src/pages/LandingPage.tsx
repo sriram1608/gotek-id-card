@@ -1,27 +1,23 @@
-import { ThemeProvider } from '../context/ThemeContext';
+
 import { Background } from '../components/Background';
-import { ThemeSwitcher } from '../components/ThemeSwitcher';
+
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { Features } from '../components/Features';
 import { Workflow } from '../components/Workflow';
 import { TemplateShowcase } from '../components/TemplateShowcase';
-import { useTheme } from '../context/ThemeContext';
 import { cn } from '../lib/utils';
 import { Link } from 'react-router-dom';
 
 export function LandingPage() {
-  const { theme } = useTheme();
-  const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
-
   return (
     <div className={cn(
       "min-h-screen transition-colors duration-500 font-sans selection:bg-blue-500/30",
-      isDark ? "text-slate-100" : "text-slate-900"
+      "text-slate-900"
     )}>
       <Background />
       <Navbar />
-      <ThemeSwitcher />
+
 
       <main>
         <Hero />
@@ -33,9 +29,7 @@ export function LandingPage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className={cn(
               "rounded-3xl p-12 md:p-20 text-center relative overflow-hidden border",
-              isDark
-                ? "bg-gradient-to-br from-blue-900/50 to-indigo-900/50 border-white/10"
-                : "bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-transparent"
+              "bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-transparent"
             )}>
               <div className="relative z-10 max-w-3xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
@@ -64,9 +58,7 @@ export function LandingPage() {
 
       <footer className={cn(
         "py-12 border-t",
-        isDark
-          ? "bg-[#020c1b] border-white/10 text-slate-400"
-          : "bg-slate-50 border-slate-200 text-slate-600"
+        "bg-slate-50 border-slate-200 text-slate-600"
       )}>
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -75,7 +67,7 @@ export function LandingPage() {
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold tracking-tight">
                   G
                 </div>
-                <span className={cn("text-xl font-bold tracking-tight", isDark ? "text-white" : "text-slate-900")}>
+                <span className={cn("text-xl font-bold tracking-tight", "text-slate-900")}>
                   Gotek
                 </span>
               </div>
@@ -85,7 +77,7 @@ export function LandingPage() {
             </div>
 
             <div>
-              <h4 className={cn("font-bold mb-4", isDark ? "text-white" : "text-slate-900")}>Product</h4>
+              <h4 className={cn("font-bold mb-4", "text-slate-900")}>Product</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="#" className="hover:text-blue-500 transition-colors">Features</a></li>
                 <li><a href="#" className="hover:text-blue-500 transition-colors">Templates</a></li>
@@ -95,7 +87,7 @@ export function LandingPage() {
             </div>
 
             <div>
-              <h4 className={cn("font-bold mb-4", isDark ? "text-white" : "text-slate-900")}>Company</h4>
+              <h4 className={cn("font-bold mb-4", "text-slate-900")}>Company</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="#" className="hover:text-blue-500 transition-colors">About Us</a></li>
                 <li><a href="#" className="hover:text-blue-500 transition-colors">Careers</a></li>
@@ -105,7 +97,7 @@ export function LandingPage() {
             </div>
 
             <div>
-              <h4 className={cn("font-bold mb-4", isDark ? "text-white" : "text-slate-900")}>Legal</h4>
+              <h4 className={cn("font-bold mb-4", "text-slate-900")}>Legal</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="#" className="hover:text-blue-500 transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-blue-500 transition-colors">Terms of Service</a></li>

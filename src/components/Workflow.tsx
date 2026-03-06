@@ -1,9 +1,8 @@
-import { useTheme } from '../context/ThemeContext';
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
-import { 
-  School, PenTool, Eye, ShoppingCart, CreditCard, 
-  FileCheck, Factory, Truck, CheckCircle 
+import {
+  School, PenTool, Eye, ShoppingCart, CreditCard,
+  FileCheck, Factory, Truck, CheckCircle
 } from 'lucide-react';
 
 const steps = [
@@ -19,32 +18,29 @@ const steps = [
 ];
 
 export function Workflow() {
-  const { theme } = useTheme();
-  const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
-
   return (
     <section className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className={cn(
               "text-3xl md:text-5xl font-bold mb-6",
-              isDark ? "text-white" : "text-slate-900"
+              "text-slate-900"
             )}
           >
             Seamless Production Workflow
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className={cn(
               "text-lg max-w-2xl mx-auto",
-              isDark ? "text-slate-400" : "text-slate-600"
+              "text-slate-600"
             )}
           >
             From registration to delivery, our automated 9-step process ensures quality and speed.
@@ -55,11 +51,11 @@ export function Workflow() {
           {/* Vertical Line */}
           <div className={cn(
             "absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 rounded-full",
-            isDark ? "bg-white/10" : "bg-slate-200"
+            "bg-slate-200"
           )} />
 
           {/* Moving Gradient on Line */}
-          <motion.div 
+          <motion.div
             className="absolute left-1/2 top-0 w-1 -translate-x-1/2 h-40 bg-gradient-to-b from-transparent via-blue-500 to-transparent z-10"
             animate={{ top: ["0%", "100%"] }}
             transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -67,7 +63,7 @@ export function Workflow() {
 
           <div className="space-y-12 md:space-y-24">
             {steps.map((step, index) => (
-              <motion.div 
+              <motion.div
                 key={step.id}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +77,7 @@ export function Workflow() {
                 {/* Content Card */}
                 <div className="flex-1 hidden md:block text-right">
                   {index % 2 === 0 && (
-                    <StepCard step={step} isDark={isDark} align="right" />
+                    <StepCard step={step} align="right" />
                   )}
                 </div>
 
@@ -89,9 +85,7 @@ export function Workflow() {
                 <div className="relative z-20 flex-shrink-0">
                   <div className={cn(
                     "w-12 h-12 rounded-full flex items-center justify-center border-4 shadow-[0_0_20px_rgba(59,130,246,0.3)]",
-                    isDark 
-                      ? "bg-[#0a192f] border-blue-500 text-white" 
-                      : "bg-white border-blue-500 text-blue-600"
+                    "bg-white border-blue-500 text-blue-600"
                   )}>
                     <span className="font-bold">{step.id}</span>
                   </div>
@@ -100,11 +94,11 @@ export function Workflow() {
                 {/* Content Card (Mobile or Alternating) */}
                 <div className="flex-1">
                   <div className="md:hidden">
-                     <StepCard step={step} isDark={isDark} align="left" />
+                    <StepCard step={step} align="left" />
                   </div>
                   <div className="hidden md:block">
                     {index % 2 !== 0 && (
-                      <StepCard step={step} isDark={isDark} align="left" />
+                      <StepCard step={step} align="left" />
                     )}
                   </div>
                 </div>
@@ -117,32 +111,30 @@ export function Workflow() {
   );
 }
 
-function StepCard({ step, isDark, align }: { step: any, isDark: boolean, align: 'left' | 'right' }) {
+function StepCard({ step, align }: { step: any, align: 'left' | 'right' }) {
   const Icon = step.icon;
   return (
     <div className={cn(
       "p-6 rounded-2xl backdrop-blur-md border transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group",
-      isDark 
-        ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-blue-500/30" 
-        : "bg-white/80 border-slate-200 hover:bg-white hover:border-blue-300 shadow-lg",
+      "bg-white/80 border-slate-200 hover:bg-white hover:border-blue-300 shadow-lg",
       align === 'right' ? "text-right" : "text-left"
     )}>
       <div className={cn(
         "inline-flex p-3 rounded-xl mb-4 transition-colors",
-        isDark ? "bg-blue-500/20 text-blue-300 group-hover:bg-blue-500 group-hover:text-white" : "bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
+        "bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
         align === 'right' ? "ml-auto" : ""
       )}>
         <Icon className="w-6 h-6" />
       </div>
       <h3 className={cn(
         "text-xl font-bold mb-2",
-        isDark ? "text-white" : "text-slate-900"
+        "text-slate-900"
       )}>
         {step.title}
       </h3>
       <p className={cn(
         "text-sm leading-relaxed",
-        isDark ? "text-slate-400" : "text-slate-600"
+        "text-slate-600"
       )}>
         {step.desc}
       </p>

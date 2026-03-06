@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 
 export interface TableColumn<T> {
@@ -15,27 +15,25 @@ interface TableProps<T> {
 }
 
 export function Table<T extends Record<string, any>>({ data, columns, className }: TableProps<T>) {
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     return (
         <div className={cn(
             "overflow-x-auto rounded-lg border",
-            isDark ? "border-white/10" : "border-slate-200",
+            "border-slate-200",
             className
         )}>
             <table className="w-full text-left border-collapse">
                 <thead>
                     <tr className={cn(
                         "border-b",
-                        isDark ? "border-white/10 bg-white/5" : "border-slate-200 bg-slate-50"
+                        "border-slate-200 bg-slate-50"
                     )}>
                         {columns.map((col) => (
                             <th
                                 key={col.key}
                                 className={cn(
                                     "px-6 py-3 text-xs font-semibold uppercase tracking-wider text-left",
-                                    isDark ? "text-slate-400" : "text-slate-500"
+                                    "text-slate-500"
                                 )}
                             >
                                 {col.header}
@@ -45,7 +43,7 @@ export function Table<T extends Record<string, any>>({ data, columns, className 
                 </thead>
                 <tbody className={cn(
                     "divide-y",
-                    isDark ? "divide-white/10" : "divide-slate-200"
+                    "divide-slate-200"
                 )}>
                     {data.length === 0 ? (
                         <tr>
@@ -59,7 +57,7 @@ export function Table<T extends Record<string, any>>({ data, columns, className 
                                 key={rowIndex}
                                 className={cn(
                                     "transition-colors hover:bg-black/5 dark:hover:bg-white/5",
-                                    isDark ? "text-slate-300" : "text-slate-700"
+                                    "text-slate-700"
                                 )}
                             >
                                 {columns.map((col) => (

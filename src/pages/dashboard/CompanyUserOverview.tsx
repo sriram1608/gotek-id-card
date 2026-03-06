@@ -2,23 +2,21 @@ import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
+
 import { cn } from '../../lib/utils';
 import { Download, RefreshCw, Mail, Phone, MapPin, Briefcase } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function CompanyUserOverview() {
     const { user } = useAuth();
-    const { theme } = useTheme();
-    const isDark = ['premium-tech', 'smart-digital', 'dark-mode'].includes(theme);
 
     return (
         <div className="space-y-6 max-w-5xl mx-auto">
             <div>
-                <h1 className={cn("text-2xl font-bold tracking-tight", isDark ? "text-white" : "text-slate-900")}>
+                <h1 className={cn("text-2xl font-bold tracking-tight", "text-slate-900")}>
                     My Dashboard
                 </h1>
-                <p className={cn("text-sm mt-1", isDark ? "text-slate-400" : "text-slate-500")}>
+                <p className={cn("text-sm mt-1", "text-slate-500")}>
                     View your profile and manage your digital identity card.
                 </p>
             </div>
@@ -32,47 +30,47 @@ export function CompanyUserOverview() {
                                 {user?.name.charAt(0)}
                             </div>
                             <div>
-                                <h2 className={cn("text-2xl font-bold", isDark ? "text-white" : "text-slate-900")}>{user?.name}</h2>
+                                <h2 className={cn("text-2xl font-bold", "text-slate-900")}>{user?.name}</h2>
                                 <div className="flex items-center gap-3 mt-1.5">
                                     <Badge variant="info">Software Engineer</Badge>
-                                    <p className={cn("text-sm font-medium", isDark ? "text-slate-400" : "text-slate-500")}>Engineering Dept</p>
+                                    <p className={cn("text-sm font-medium", "text-slate-500")}>Engineering Dept</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
-                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", isDark ? "text-slate-500" : "text-slate-400")}>Contact Details</h3>
+                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", "text-slate-400")}>Contact Details</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-3 text-sm">
-                                        <Mail className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
-                                        <span className={cn(isDark ? "text-slate-300" : "text-slate-700")}>{user?.email}</span>
+                                        <Mail className={cn("w-4 h-4", "text-slate-500")} />
+                                        <span className={cn("text-slate-700")}>{user?.email}</span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <Phone className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
-                                        <span className={cn(isDark ? "text-slate-300" : "text-slate-700")}>+1 (555) 123-4567</span>
+                                        <Phone className={cn("w-4 h-4", "text-slate-500")} />
+                                        <span className={cn("text-slate-700")}>+1 (555) 123-4567</span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <MapPin className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
-                                        <span className={cn(isDark ? "text-slate-300" : "text-slate-700")}>San Francisco, CA</span>
+                                        <MapPin className={cn("w-4 h-4", "text-slate-500")} />
+                                        <span className={cn("text-slate-700")}>San Francisco, CA</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="space-y-4">
-                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", isDark ? "text-slate-500" : "text-slate-400")}>Work Details</h3>
+                                <h3 className={cn("text-sm font-semibold uppercase tracking-wider", "text-slate-400")}>Work Details</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-3 text-sm">
-                                        <Briefcase className={cn("w-4 h-4", isDark ? "text-slate-400" : "text-slate-500")} />
-                                        <span className={cn(isDark ? "text-slate-300" : "text-slate-700")}>Employee ID: <span className="font-mono">TC-2094</span></span>
+                                        <Briefcase className={cn("w-4 h-4", "text-slate-500")} />
+                                        <span className={cn("text-slate-700")}>Employee ID: <span className="font-mono">TC-2094</span></span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <div className={cn("w-4 h-4 rounded-full border-2", isDark ? "border-slate-400" : "border-slate-500")} />
-                                        <span className={cn(isDark ? "text-slate-300" : "text-slate-700")}>Full-time</span>
+                                        <div className={cn("w-4 h-4 rounded-full border-2", "border-slate-500")} />
+                                        <span className={cn("text-slate-700")}>Full-time</span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm">
-                                        <div className={cn("w-4 h-4 rounded-full border-2", isDark ? "border-slate-400" : "border-slate-500")} />
-                                        <span className={cn(isDark ? "text-slate-300" : "text-slate-700")}>Joined: Jan 15, 2023</span>
+                                        <div className={cn("w-4 h-4 rounded-full border-2", "border-slate-500")} />
+                                        <span className={cn("text-slate-700")}>Joined: Jan 15, 2023</span>
                                     </div>
                                 </div>
                             </div>
@@ -80,12 +78,12 @@ export function CompanyUserOverview() {
                     </Card>
 
                     <Card>
-                        <h2 className={cn("text-lg font-semibold mb-4", isDark ? "text-white" : "text-slate-900")}>Card Requests History</h2>
+                        <h2 className={cn("text-lg font-semibold mb-4", "text-slate-900")}>Card Requests History</h2>
                         <div className="space-y-4">
-                            <div className={cn("p-4 rounded-lg border flex items-center justify-between", isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200")}>
+                            <div className={cn("p-4 rounded-lg border flex items-center justify-between", "bg-slate-50 border-slate-200")}>
                                 <div>
-                                    <p className={cn("text-sm font-medium", isDark ? "text-slate-200" : "text-slate-800")}>Initial Issue</p>
-                                    <p className={cn("text-xs mt-0.5", isDark ? "text-slate-500" : "text-slate-500")}>Jan 15, 2023</p>
+                                    <p className={cn("text-sm font-medium", "text-slate-800")}>Initial Issue</p>
+                                    <p className={cn("text-xs mt-0.5", "text-slate-500")}>Jan 15, 2023</p>
                                 </div>
                                 <Badge variant="success">Completed</Badge>
                             </div>
@@ -96,7 +94,7 @@ export function CompanyUserOverview() {
                 {/* Right Col - ID Card Preview */}
                 <div className="lg:col-span-1 space-y-6">
                     <Card className="flex flex-col items-center">
-                        <h2 className={cn("text-sm justify-self-start self-start font-semibold mb-6", isDark ? "text-white" : "text-slate-900")}>Virtual ID Card</h2>
+                        <h2 className={cn("text-sm justify-self-start self-start font-semibold mb-6", "text-slate-900")}>Virtual ID Card</h2>
 
                         {/* The ID Card */}
                         <motion.div
